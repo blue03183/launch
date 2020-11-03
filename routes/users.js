@@ -33,33 +33,26 @@ console.log(userTokens);
       continue;
     }
 
-    // notifications.push({
-    //   to: pushToken,
-    //   sound: 'default',
-    //   title: '메세지가 도착했습니다.',
-    //   body: message,
-    //   data: { message }
-    // });
-
-    await expo.sendPushNotificationsAsync({
+    notifications.push({
       to: pushToken,
       sound: 'default',
       title: '메세지가 도착했습니다.',
-      body: message,
       data: { message }
     });
+    
+    await expo.sendPushNotificationsAsync(chunk);
   }
 
-  // let chunks = expo.chunkPushNotifications(notifications);
+  let chunks = expo.chunkPushNotifications(notifications);
 
-  // for (let chunk of chunks) {
-  //   try {
-  //     let receipts = await expo.sendPushNotificationsAsync(chunk);
-  //     console.log(receipts);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+  for (let chunk of chunks) {
+    try {
+      let receipts = await expo.sendPushNotificationsAsync(chunk);
+      console.log(receipts);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   res.send('메시지 전송');
 });
