@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 router.post('/token', (req, res) => {
   console.log('---------------req.body-----------------');
   console.log(req.body);
-  const token = req.body.token.value;
+  const token = req.body.token;
 
   if (!userTokens.includes(token)) {
     userTokens.push(token);
