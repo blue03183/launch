@@ -8,6 +8,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const launchRouter = require('./routes/launch');
 
+// 토큰정보 글로벌 선언
+global.userTokens = [];
+
 var app = express();
 
 // view engine setup
