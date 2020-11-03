@@ -11,6 +11,8 @@ router.get('/', function(req, res, next) {
 
 // 토큰저장
 router.post('/token', (req, res) => {
+  console.log('---------------req.body-----------------');
+  console.log(req.body);
   const token = req.body.token.value;
 
   if (!userTokens.includes(token)) {
