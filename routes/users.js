@@ -53,6 +53,10 @@ router.post('/message', async (req, res) => {
   res.send('메시지 전송');
 });
 
+router.get('/tokenLists', (req, res) => {
+  res.send(`tokens: ${userTokens.join()}`);
+});
+
 
 
 module.exports = router;
