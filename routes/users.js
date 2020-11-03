@@ -23,7 +23,8 @@ router.post('/token', (req, res) => {
 router.post('/message', async (req, res) => {
   const message = '맥도날드 빅맥세트';
   const notifications = [];
-
+console.log('-----------------userTokens---------------');
+console.log(userTokens);
   for (const pushToken of userTokens) {
     console.log('----------------pushToken----------------');
     console.log(pushToken);
