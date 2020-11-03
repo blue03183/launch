@@ -37,7 +37,7 @@ console.log(userTokens);
       to: pushToken,
       sound: 'default',
       title: '메세지가 도착했습니다.',
-      data: { message }
+      body: message
     });
     
     await expo.sendPushNotificationsAsync(chunk);
