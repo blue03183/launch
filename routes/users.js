@@ -10,9 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 // 토큰저장
-router.post('/token', (req, res) => {
-  console.log('---------------req.body-----------------');
-  console.log(req.body);
+router.post('/token', (req, res) => {  
   const token = req.body.token;
 
   if (!userTokens.includes(token)) {
@@ -31,7 +29,7 @@ console.log(userTokens);
     console.log('----------------pushToken----------------');
     console.log(pushToken);
     if (!Expo.isExpoPushToken(pushToken)) {
-      console.log('에러!');
+      console.log('토큰정보가 유효하지 않습니다.');
       continue;
     }
 
@@ -42,18 +40,20 @@ console.log(userTokens);
       body: message,
       data: { message }
     });
+
+    await expo.sendPushNotificationsAsync(chunk);
   }
 
-  let chunks = expo.chunkPushNotifications(notifications);
+  // let chunks = expo.chunkPushNotifications(notifications);
 
-  for (let chunk of chunks) {
-    try {
-      let receipts = await expo.sendPushNotificationsAsync(chunk);
-      console.log(receipts);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // for (let chunk of chunks) {
+  //   try {
+  //     let receipts = await expo.sendPushNotificationsAsync(chunk);
+  //     console.log(receipts);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   res.send('메시지 전송');
 });
